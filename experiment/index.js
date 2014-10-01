@@ -31,7 +31,7 @@ Waterline({}, function (err, wl1orm){
 
   agenda.define('job which spawns other jobs', {lockLifetime: 5000}, function(job, done) {
     console.log('running "job which spawns other jobs"...');
-    async.each(_.range(1,10), function (i, next) {
+    async.eachSeries(_.range(1,10), function (i, next) {
       setTimeout(function (){
         agenda.schedule(new Date((new Date()).getTime()+1000), 'holla', { someId: 'NEW'+i} );
         next();
