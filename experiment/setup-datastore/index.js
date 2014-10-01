@@ -37,14 +37,14 @@ module.exports = function setup_datastore(options, cb) {
     collections: (function (){
       return {
         agendaJobs: {
-          connection: 'localDiskDb'
+          connection: 'localDiskDb',
+          attributes: {
+            nextRunAt: { type: 'date' },
+            lockedAt: { type: 'date' },
+            priority: { type: 'number' },
+            name: { type: 'string' }
+          }
         },
-        attributes: {
-          nextRunAt: { type: 'date' },
-          lockedAt: { type: 'date' },
-          priority: { type: 'number' },
-          name: { type: 'string' }
-        }
       };
     })()
 
