@@ -71,9 +71,9 @@ Waterline({}, function (err, wl1orm){
     console.log('running "job which spawns other jobs"...');
     // console.log('(job type: %s)',job.attrs._id);
 
-    async.each(_.range(1,3), function (i, next) {
+    async.eachSeries(_.range(1,10), function (i, next) {
       setTimeout(function (){
-        console.log('(((scheduling NEW%s)))', i);
+        // console.log('(((scheduling NEW%s)))', i);
         agenda.schedule(new Date((new Date()).getTime()+1000), 'holla', { someId: 'NEW'+i} );
         next();
       }, 250*i);
@@ -83,7 +83,7 @@ Waterline({}, function (err, wl1orm){
     });
   });
 
-  agenda.every('105 seconds', 'job which spawns other jobs');
+  agenda.every('15 seconds', 'job which spawns other jobs');
 
 
   agenda.start();

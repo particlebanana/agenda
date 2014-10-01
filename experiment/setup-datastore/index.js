@@ -20,15 +20,15 @@ module.exports = function setup_datastore(options, cb) {
     // (i.e. buckets of static functions which map to underlying datastore)
     adapters: (function (){
       return {
-        'sails-disk': require('sails-disk')
+        'sails-mongo': require('sails-mongo')
       };
     })(),
 
     // (i.e. datastore configurations)
     connections: (function (){
       return {
-        localDiskDb: {
-          adapter: 'sails-disk'
+        localMongo: {
+          adapter: 'sails-mongo'
         }
       };
     })(),
@@ -37,7 +37,7 @@ module.exports = function setup_datastore(options, cb) {
     collections: (function (){
       return {
         agendaJobs: {
-          connection: 'localDiskDb',
+          connection: 'localMongo',
           attributes: {
             nextRunAt: { type: 'date', defaultsTo: null },
             lockedAt: { type: 'date', defaultsTo: null },
