@@ -46,12 +46,6 @@ Waterline({}, function (err, wl1orm){
           // console.log('RESULTS:',err,results);
           if (err) return cb(err);
 
-          // Make sure `_id` is there
-          results = _.map(results, function (record){
-            record._id = record._id || record.id;
-            return record;
-          });
-
           return cb(null, results);
         });
       };
