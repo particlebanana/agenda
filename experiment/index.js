@@ -67,22 +67,23 @@ Waterline({}, function (err, wl1orm){
     }, 150);
   });
 
-  // agenda.define('job which spawns other jobs', {lockLifetime: 5000}, function(job, done) {
-  //   console.log('running "job which spawns other jobs"...');
-  //   // console.log('(job type: %s)',job.attrs._id);
+  agenda.define('job which spawns other jobs', {lockLifetime: 5000}, function(job, done) {
+    console.log('running "job which spawns other jobs"...');
+    return done();
+    // console.log('(job type: %s)',job.attrs._id);
 
-  //   async.each(_.range(1,10), function (i, next) {
-  //     setTimeout(function (){
-  //       agenda.schedule(new Date((new Date()).getTime()+1000), 'holla', { someId: 'NEW'+i} );
-  //       next();
-  //     }, 250*i);
-  //   }, function afterwards(err){
-  //     if (err) return done(err);
-  //     return done();
-  //   });
-  // });
+    async.each(_.range(1,10), function (i, next) {
+      setTimeout(function (){
+        agenda.schedule(new Date((new Date()).getTime()+1000), 'holla', { someId: 'NEW'+i} );
+        next();
+      }, 250*i);
+    }, function afterwards(err){
+      if (err) return done(err);
+      return done();
+    });
+  });
 
-  // agenda.every('5 seconds', 'job which spawns other jobs');
+  agenda.every('5 seconds', 'job which spawns other jobs');
 
   agenda.start();
   console.log('Starting agenda...');
