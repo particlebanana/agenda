@@ -13,7 +13,7 @@ var agenda = new Agenda({
   }
 });
 
-agenda.define('delete old users', {lockLifetime: 5000}, function(job, done) {
+agenda.define('delete old users', {lockLifetime: 2000}, function(job, done) {
   console.log('job ran...');
   console.log('(job type: %s)',job.attrs._id);
   done();
