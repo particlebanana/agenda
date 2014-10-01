@@ -39,11 +39,12 @@ module.exports = function setup_datastore(options, cb) {
         agendaJobs: {
           connection: 'localDiskDb',
           attributes: {
-            nextRunAt: { type: 'date' },
-            lockedAt: { type: 'date' },
-            priority: { type: 'string' },
-            name: { type: 'string' }
-          }
+            nextRunAt: { type: 'date', defaultsTo: null },
+            lockedAt: { type: 'date', defaultsTo: null },
+            priority: { type: 'string', defaultsTo: 0 },
+            name: { type: 'string', defaultsTo: null },
+          },
+          migrate: 'safe'
         },
       };
     })()
