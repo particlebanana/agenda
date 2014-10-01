@@ -41,7 +41,7 @@ module.exports = function setup_datastore(options, cb) {
           attributes: {
             nextRunAt: { type: 'date' },
             lockedAt: { type: 'date' },
-            priority: { type: 'number' },
+            priority: { type: 'string' },
             name: { type: 'string' }
           }
         },
